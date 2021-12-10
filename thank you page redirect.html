@@ -1,0 +1,16 @@
+<script>
+  
+let gumroadSaleListener = function(ev){
+
+  //Can replace #done with anything you desire.
+  let loc = window.location.href + '#done';
+  
+  if (ev.data && JSON.parse(ev.data).post_message_name === "sale") {
+    document.querySelector(".gumroad-scroll-container").remove();
+    window.location.href = loc;
+  };
+};
+  
+  window.addEventListener("message", gumroadSaleListener);
+
+  </script>

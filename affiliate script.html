@@ -1,0 +1,47 @@
+<script>
+//This will trigger when the whole document is loaded.
+window.onload = function(){
+  
+  let affQuery = location.href.split("?code=");
+  let baseCode = ""; //Leave blank unless you have a base affiliate.
+
+  //A URL is created for each tier or product. Pay attention to the URL structure.
+  let baseFreeURL = "https://gumroad.com/l/PRODUCT-ID/DISCOUNT-CODE?tier=FREE&wanted=true"
+  let basePaidURL = "https://gumroad.com/l/PRODUCT-ID?tier=PRO&wanted=true"
+
+
+  let code = false;
+  
+
+  //This is a default aff. code that you can use to give writers or marketers a base commission.
+  //Otherwise leave the baseCode variable blank up top.
+
+  if(affQuery.length === 2){
+  	code = "&affiliate_id=" + affQuery[1];
+  } else {
+  	code = "&affiliate_id=" + baseCode;
+  }
+
+  baseFreeURL = baseFreeURL + code;
+  basePaidURL = basePaidURL + code;
+  
+  let links = document.getElementsByTagName("a");
+	
+  //LOOP THROUGH LINKS AND FIND FATHER CONTAINER WITH ID.
+  
+  for (const link of links) {
+    //ID for free found here. Replaces with the corresponding URL.
+    if(link.closest("#gumroad-free")){
+      console.log(`Found url. Changing to: ${baseFreeURL}`)
+      link.href=baseFreeURL;
+    }
+	
+    //ID for paid found here. Replaces with the corresponding URL.
+  	else if(link.closest("#gumroad-paid")){
+  	   console.log(`Found url. Changing to: ${basePaidURL}`)
+       link.href=basePaidURL;
+  	}
+  };
+}
+
+</script>
